@@ -33,9 +33,18 @@ on boot
     chmod 664	/dev/akm8975
     chown system system /sys/class/K3G_GYRO-dev/k3g/gyro_selftest_dps
     chown system system /sys/class/sec/gsensorcal/calibration
+    chown system system /sys/class/proximity/proximity/proximity_avg
+    chown system system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest
+    chown system system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_get_temp
+    chown system system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_power_on
+    chown system system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest_dps
+    chown system system /sys/devices/virtual/accelerometer/accelerometer/acc_file
+    chown system system /sys/devices/virtual/sec/gsensorcal/calibration
+    chown system system /sys/class/sensors/barometer_sensor/sea_level_pressure
+    chown system system /sys/class/sensors/barometer_sensor/eeprom_check
 
     #camera
-    chown system system /sys/class/ledflash/sec_ledflash/torch 
+    chown system camera /sys/class/ledflash/sec_ledflash/torch
 
 # ko files for vibrator (block this cmd temporary. vibrato driver cause reset during boot)
     insmod /system/lib/modules/vibrator.ko
@@ -84,10 +93,10 @@ service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
     user root
     disabled
 
-service thermald /system/bin/thermald
-    class main
-    user root
-    group root
+#service thermald /system/bin/thermald
+#    class main
+#    user root
+#    group root
 
 service qrngd /system/bin/qrngd -f
     user root
@@ -105,8 +114,3 @@ service TvoutService_C /system/bin/bintvoutservice
      class main
      user system
      group graphics
-     
-# docomo virus scan - start daemon
-service mfescand /system/bin/mfescand 
-     class main
-     socket mfescand stream 600 system system

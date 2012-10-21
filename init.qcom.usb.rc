@@ -39,8 +39,8 @@ on boot
     write /sys/class/android_usb/android0/iSerial $ro.serialno
     write /sys/class/android_usb/f_mass_storage/inquiry_string "Samsung"
     write /sys/class/android_usb/f_mass_storage/vendor_string "SAMSUNG"
-    write /sys/class/android_usb/f_mass_storage/product_string "SC-05D"
-    
+    write /sys/class/android_usb/f_mass_storage/product_string "SGH-I717"
+
 # rndis,acm,diag and rmnet,acm,diag are used for IOT Hidden Menu
 on property:sys.usb.config=rndis,acm,diag
     write /sys/class/android_usb/android0/enable 0
@@ -336,7 +336,7 @@ on property:sys.usb.config=mass_storage,adb
 #    write /sys/class/android_usb/android0/enable 1
 #    start adbd
 #    setprop sys.usb.state $sys.usb.config
-	
+
 on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 04E8
@@ -355,7 +355,7 @@ on property:sys.usb.config=mtp,adb
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state $sys.usb.config
-    
+
 on property:sys.usb.config=mtp,acm
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 04E8
@@ -374,7 +374,7 @@ on property:sys.usb.config=mtp,acm,adb
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state $sys.usb.config
-    	
+
 on property:sys.usb.config=ptp
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 04E8
@@ -382,9 +382,9 @@ on property:sys.usb.config=ptp
     write /sys/class/android_usb/android0/functions ptp
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state $sys.usb.config
- 
+
 on property:sys.usb.config=ptp,adb
-    write /sys/class/android_usb/android0/enable 0 
+    write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 04E8
     write /sys/class/android_usb/android0/idProduct 6866
     write /sys/class/android_usb/android0/functions ptp,adb

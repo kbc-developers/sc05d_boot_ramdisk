@@ -31,8 +31,8 @@ on emmc-fs
     #wait /dev/block/mmcblk0p24
     #mount ext4 /dev/block/mmcblk0p24 /system ro barrier=1
     #mount ext4 /dev/block/mmcblk0p26 /cache nosuid nodev barrier=1
-    #exec /system/bin/e2fsck -p /dev/block/mmcblk0p21
-    #mount ext4 /dev/block/mmcblk0p21 /efs nosuid nodev barrier=1
+    exec /system/bin/e2fsck -p /dev/block/mmcblk0p21
+    mount ext4 /dev/block/mmcblk0p21 /efs nosuid nodev barrier=1
     #wait /dev/block/mmcblk0p25
     #exec /system/bin/e2fsck -p /dev/block/mmcblk0p25
     #mount ext4 /dev/block/mmcblk0p25 /data nosuid nodev barrier=1 noauto_da_alloc
@@ -44,17 +44,17 @@ on emmc-fs
 
     mount ext4 loop@/sdboot/system.img /system
     mount ext4 loop@/sdboot/system.img /system ro barrier=1
-    mount ext4 loop@/sdboot/efs.img /efs nosuid nodev barrier=1
+    #mount ext4 loop@/sdboot/efs.img /efs nosuid nodev barrier=1
 
     rmdir /data
     rmdir /cache
     mkdir /sdboot
     mkdir /sdboot/data
     mkdir /sdboot/cache
-    chmod 0771 /sdboot/data
+    chmod 0777 /sdboot/data
     chown system system /sdboot/data
     symlink /sdboot/data /data
-    chmod 0770 /sdboot/cache
+    chmod 0777 /sdboot/cache
     chown system cache /sdboot/cache
     symlink /sdboot/cache /cache
 # sd boot end

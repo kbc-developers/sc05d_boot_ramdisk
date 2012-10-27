@@ -40,23 +40,11 @@ on emmc-fs
 # sd boot start
     mkdir /sdboot
     wait /dev/block/mmcblk1p1
-    mount ext4 /dev/block/mmcblk1p1 /sdboot nosuid nodev barrier=1
+    mount vfat /dev/block/mmcblk1p1 /sdboot
 
-    mount ext4 loop@/sdboot/system.img /system
-    mount ext4 loop@/sdboot/system.img /system ro barrier=1
-    #mount ext4 loop@/sdboot/efs.img /efs nosuid nodev barrier=1
-
-    rmdir /data
-    rmdir /cache
-    mkdir /sdboot
-    mkdir /sdboot/data
-    mkdir /sdboot/cache
-    chmod 0777 /sdboot/data
-    chown system system /sdboot/data
-    symlink /sdboot/data /data
-    chmod 0777 /sdboot/cache
-    chown system cache /sdboot/cache
-    symlink /sdboot/cache /cache
+    mount ext4 loop@/sdboot/cm9/system.raw.ext4 /system barrier=1
+    mount ext4 loop@/sdboot/cm9/cache.raw.ext4 /cache nosuid nodev barrier=1
+    mount ext4 loop@/sdboot/cm9/data.raw.ext4 /data nosuid nodev barrier=1 noauto_da_alloc
 # sd boot end
 
     mount tmpfs tmpfs /system/lib/modules

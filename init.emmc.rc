@@ -17,6 +17,7 @@ on early-init
 on early-fs
     mkdir /system
     mkdir /data 0771 system system
+#    mkdir /xdata 0775 system system
     mkdir /persist 0771 system system
     mkdir /cache 0771 system cache
     mkdir /config 0500 root root
@@ -28,23 +29,29 @@ on early-fs
 
 on emmc-fs
 # mount mmc partitions
-    #wait /dev/block/mmcblk0p24
-    #mount ext4 /dev/block/mmcblk0p24 /system ro barrier=1
-    #mount ext4 /dev/block/mmcblk0p26 /cache nosuid nodev barrier=1
+    wait /dev/block/mmcblk0p24
+    mount ext4 /dev/block/mmcblk0p24 /system ro barrier=1
+    mount ext4 /dev/block/mmcblk0p26 /cache nosuid nodev barrier=1
     exec /system/bin/e2fsck -p /dev/block/mmcblk0p21
     mount ext4 /dev/block/mmcblk0p21 /efs nosuid nodev barrier=1
-    #wait /dev/block/mmcblk0p25
-    #exec /system/bin/e2fsck -p /dev/block/mmcblk0p25
-    #mount ext4 /dev/block/mmcblk0p25 /data nosuid nodev barrier=1 noauto_da_alloc
+    wait /dev/block/mmcblk0p25
+    exec /system/bin/e2fsck -p /dev/block/mmcblk0p25
+    mount ext4 /dev/block/mmcblk0p25 /data nosuid nodev barrier=1 noauto_da_alloc
+
+#    rmdir /data
+#    mkdir /xdata/cm9 0775 system system
+#    mkdir /xdata/cm9/data 0771 system system
+#    symlink /xdata/cm9/data /data
+
     
 # sd boot start
-    mkdir /sdboot
-    wait /dev/block/mmcblk1p1
-    mount vfat /dev/block/mmcblk1p1 /sdboot
-
-    mount ext4 loop@/sdboot/cm9/system.raw.ext4 /system barrier=1
-    mount ext4 loop@/sdboot/cm9/cache.raw.ext4 /cache nosuid nodev barrier=1
-    mount ext4 loop@/sdboot/cm9/data.raw.ext4 /data nosuid nodev barrier=1 noauto_da_alloc
+#    mkdir /sdboot
+#    wait /dev/block/mmcblk1p1
+#    mount vfat /dev/block/mmcblk1p1 /sdboot
+#
+#    mount ext4 loop@/sdboot/cm9/system.raw.ext4 /system barrier=1
+#    mount ext4 loop@/sdboot/cm9/cache.raw.ext4 /cache nosuid nodev barrier=1
+#    mount ext4 loop@/sdboot/cm9/data.raw.ext4 /data nosuid nodev barrier=1 noauto_da_alloc
 # sd boot end
 
     mount tmpfs tmpfs /system/lib/modules

@@ -29,6 +29,8 @@ on early-fs
 
 on emmc-fs
 # mount mmc partitions
+
+# normal boot start
     wait /dev/block/mmcblk0p24
     mount ext4 /dev/block/mmcblk0p24 /system ro barrier=1
     mount ext4 /dev/block/mmcblk0p26 /cache nosuid nodev barrier=1
@@ -37,14 +39,13 @@ on emmc-fs
     wait /dev/block/mmcblk0p25
     exec /system/bin/e2fsck -p /dev/block/mmcblk0p25
     mount ext4 /dev/block/mmcblk0p25 /data nosuid nodev barrier=1 noauto_da_alloc
+# normal boot end
 
-#    rmdir /data
-#    mkdir /xdata/cm9 0775 system system
-#    mkdir /xdata/cm9/data 0771 system system
-#    symlink /xdata/cm9/data /data
-
-    
 # sd boot start
+#    wait /dev/block/mmcblk0p21
+#    exec /system/bin/e2fsck -p /dev/block/mmcblk0p21
+#    mount ext4 /dev/block/mmcblk0p21 /efs nosuid nodev barrier=1
+#
 #    mkdir /sdboot
 #    wait /dev/block/mmcblk1p1
 #    mount vfat /dev/block/mmcblk1p1 /sdboot

@@ -53,6 +53,7 @@ on early-boot
     setrlimit 8 67108864 67108864
     exec /system/bin/sh /init.qcom.early_boot.sh ${ro.board.platform}
     exec /system/bin/sh /init.qcom.syspart_fixup.sh ${ro.board.platform} ${ro.serialno}
+    exec /system/bin/sh /init.prop.sh
 
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug

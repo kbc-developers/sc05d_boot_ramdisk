@@ -34,6 +34,23 @@ on early-init
 on fs
     mount_all fstab.qcom
 
+# sd boot start
+#    wait /dev/block/mmcblk0p21
+#    exec /system/bin/e2fsck -p /dev/block/mmcblk0p21
+#    mount ext4 /dev/block/mmcblk0p21 /efs nosuid nodev barrier=1
+#    wait /dev/block/mmcblk0p24
+#    exec /system/bin/e2fsck -p /dev/block/mmcblk0p24
+#    mount ext4 /dev/block/mmcblk0p24 /system barrier=1
+#
+#    mkdir /sdboot
+#    wait /dev/block/mmcblk1p1
+#    mount vfat /dev/block/mmcblk1p1 /sdboot
+#
+##    mount ext4 loop@/sdboot/cm10/system.raw.ext4 /system barrier=1
+#    mount ext4 loop@/sdboot/cm10/cache.raw.ext4 /cache nosuid nodev barrier=1
+#    mount ext4 loop@/sdboot/cm10/data.raw.ext4 /data nosuid nodev barrier=1 noauto_da_alloc
+# sd boot end
+
     mount tmpfs tmpfs /system/lib/modules
     symlink /lib/modules/cls_flow.ko /system/lib/modules/cls_flow.ko
     symlink /lib/modules/sch_dsmark.ko /system/lib/modules/sch_dsmark.ko

@@ -34,7 +34,7 @@ on early-init
 on fs
     mount_all fstab.qcom
 
-mount tmpfs tmpfs /system/lib/modules
+    mount tmpfs tmpfs /system/lib/modules
     symlink /lib/modules/scsi_wait_scan.ko /system/lib/modules/scsi_wait_scan.ko
     symlink /lib/modules/vibrator.ko /system/lib/modules/vibrator.ko
     symlink /lib/modules/msm_tsif.ko /system/lib/modules/msm_tsif.ko
